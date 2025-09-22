@@ -303,20 +303,56 @@ body {
             }
         }
 
-        tr.ptsUp td.ptsDiff, tr.posUp td.posDiff {
-            @extend %primary-2-text;
+        tbody tr {
+            transition: background-color 0.2s ease-in-out;
         }
 
-        tr.ptsDown td.ptsDiff, tr.posDown td.posDiff {
-            @extend %accent-text;
+        tbody tr:nth-child(odd) {
+            background-color: lighten($primary-1, 48%);
         }
 
-        tr:nth-child(odd) {
-           @extend %white;
+        tbody tr:nth-child(even) {
+            background-color: $white;
         }
 
-        tr:nth-child(even) {
-           @extend %white;
+        tbody tr:hover {
+            background-color: lighten($primary-1, 35%);
+        }
+
+        td.ptsDiff,
+        td.posDiff {
+            border-radius: 999px;
+            font-weight: 500;
+            padding: 2px 8px;
+            text-align: right;
+            transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+            white-space: nowrap;
+        }
+
+        tr.ptsUp td.ptsDiff,
+        tr.posUp td.posDiff {
+            background-color: rgba($primary-2, 0.12);
+            color: $primary-2;
+
+            &::before {
+                content: '\25B2';
+                display: inline-block;
+                font-size: 9px;
+                margin-right: 4px;
+            }
+        }
+
+        tr.ptsDown td.ptsDiff,
+        tr.posDown td.posDiff {
+            background-color: rgba($accent, 0.15);
+            color: $accent;
+
+            &::before {
+                content: '\25BC';
+                display: inline-block;
+                font-size: 9px;
+                margin-right: 4px;
+            }
         }
     }
 }
@@ -352,8 +388,29 @@ body {
             padding: 0 4px;
         }
 
+        tbody tr {
+            transition: background-color 0.2s ease-in-out;
+        }
+
+        tbody tr:nth-child(odd) {
+            background-color: lighten($primary-1, 52%);
+        }
+
+        tbody tr:nth-child(even) {
+            background-color: $white;
+        }
+
+        tbody tr:hover {
+            background-color: lighten($primary-1, 40%);
+        }
+
         tbody.fixture tr:first-child td {
             padding-top: 10px;
+            border-top: 2px solid lighten($primary-1, 35%);
+        }
+
+        tbody.fixture tr:last-child td {
+            border-bottom: 2px solid lighten($primary-1, 35%);
         }
 
         th {
