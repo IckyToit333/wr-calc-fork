@@ -166,7 +166,8 @@ table {
     #left {
         @include height(6);
         height: 100%;
-        flex: 1 1 0;
+
+        flex: 0 1 40%;
         display: flex;
         flex-direction: column;
     }
@@ -175,7 +176,7 @@ table {
         height: 100%;
         display: flex;
         flex-direction: column;
-        flex: 1 1 0;
+        flex: 0 1 60%;
     }
     #left, #right {
     .header h3 {
