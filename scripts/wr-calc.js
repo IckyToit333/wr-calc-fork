@@ -162,6 +162,7 @@ var fixturesLoaded = function (fixtures, rankings) {
         addFixture(true, function (fixture) {
             fixture.homeId(e.teams[0].id);
             if (e.teams[1]) fixture.awayId(e.teams[1].id); // See ANC above
+            fixture.canEditTeams(false);
             fixture.noHome(false);
             fixture.switched(false);
             fixture.kickoff = $.formatDateTime('D dd/mm/yy hh:ii', new Date(e.time.millis));
