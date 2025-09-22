@@ -121,5 +121,18 @@ var FixtureViewModel = function (parent) {
         return result;
     }, this);
 
+    this.preventCheckboxToggle = function (_, event) {
+        if (event) {
+            if (typeof event.preventDefault === 'function') {
+                event.preventDefault();
+            }
+            if (typeof event.stopPropagation === 'function') {
+                event.stopPropagation();
+            }
+        }
+
+        return false;
+    };
+
     return this;
 };

@@ -99,10 +99,10 @@
                             </td>
                             <td colspan="2" style="text-align: right"><select data-bind="options: $parent.teams, optionsText: 'displayName', optionsValue: 'id', value: awayId, optionsCaption: awayCaption, disabled: !$data.canEditTeams() || $data.alreadyInRankings"></select></td colspan="2">
                             <td>
-                                <input type="checkbox" data-bind="checked: noHome, disabled: alreadyInRankings" />
+                                <input type="checkbox" data-bind="checked: noHome, click: preventCheckboxToggle, event: { keydown: preventCheckboxToggle }" />
                                 <span data-bind="if: switched" title="Home team is nominally Away">*</span>
                             </td>
-                            <td><input type="checkbox" data-bind="checked: isRwc, disabled: alreadyInRankings" /></td>
+                            <td><input type="checkbox" data-bind="checked: isRwc, click: preventCheckboxToggle, event: { keydown: preventCheckboxToggle }" /></td>
                             <td><button data-bind="click: function () { $parent.fixtures.remove($data); }, disabled: alreadyInRankings">x</button></td>
                         </tr>
                         <!-- ko if: $data.hasValidTeams() && !$data.alreadyInRankings -->
