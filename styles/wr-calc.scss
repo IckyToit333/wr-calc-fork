@@ -282,26 +282,36 @@ body {
 }
 
 #union {
-    display: flex;
-    @extend %white;
-
-    height: 24px;
-    line-height: 24px;
-    width: 100%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin: 24px auto 0;
+    padding: 4px;
+    border-radius: 999px;
+    background-color: lighten($primary-1, 35%);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+    gap: 4px;
 
     a {
-        flex-grow: 1;
-        text-align: center;
-        border-bottom: 2px solid $white;
-        display: block;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 88px;
+        padding: 6px 18px;
+        border-radius: 999px;
         text-decoration: none;
+        color: rgba($black, 0.54);
+        transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+
+        &:hover,
+        &:focus {
+            color: rgba($black, 0.87);
+        }
 
         &.sel {
-            @extend .primaryText;
-            border-bottom-color: $accent;
-        }
-        &:not(.sel) {
-            @extend .secondaryText;
+            background-color: $white;
+            color: rgba($black, 0.87);
+            box-shadow: inset 0 0 0 1px rgba($primary-2, 0.3);
         }
     }
 }
