@@ -1,11 +1,18 @@
 // View model for a fixture entry.
 // Pass the parent view model to check for validity.
 // Should probably be able to pass the raw data from the API here.
+var FIXTURE_OUTCOME_OPTIONS = [
+    { value: 0, label: 'Home win by 16+' },
+    { value: 1, label: 'Home win by 1-15' },
+    { value: 2, label: 'Draw' },
+    { value: 3, label: 'Away win by 1-15' },
+    { value: 4, label: 'Away win by 16+' }
+];
+
 var FixtureViewModel = function (parent) {
     this.homeId = ko.observable();
     this.awayId = ko.observable();
-    this.homeScore = ko.observable();
-    this.awayScore = ko.observable();
+    this.result = ko.observable();
 
     this.homeRankingBefore = ko.observable();
     this.awayRankingBefore = ko.observable();
@@ -21,6 +28,9 @@ var FixtureViewModel = function (parent) {
     this.awayCaption = 'Away...';
     this.eventPhase = null;
 
+    this.outcomeCaption = 'Outcome...';
+    this.outcomeOptions = FIXTURE_OUTCOME_OPTIONS;
+
     this.noHome = ko.observable();
     this.switched = ko.observable();
     this.isRwc = ko.observable();
@@ -33,12 +43,9 @@ var FixtureViewModel = function (parent) {
     }, this);
 
     this.isValid = ko.computed(function() {
-        var homeScore = parseInt(this.homeScore());
-        var awayScore = parseInt(this.awayScore());
+        var result = parseInt(this.result(), 10);
 
-        return this.hasValidTeams() &&
-            !isNaN(homeScore) &&
-            !isNaN(awayScore);
+        return this.hasValidTeams() && !isNaN(result);
     }, this);
 
     this.changes = ko.computed(function () {
@@ -92,14 +99,12 @@ var FixtureViewModel = function (parent) {
             return null;
         }
 
-        var homeScore = parseInt(this.homeScore());
-        var awayScore = parseInt(this.awayScore());
+        var result = parseInt(this.result(), 10);
+        if (isNaN(result)) {
+            return null;
+        }
 
-        if (homeScore > awayScore + 15) return 0;
-        if (homeScore > awayScore) return 1;
-        if (awayScore > homeScore + 15) return 4;
-        if (awayScore > homeScore) return 3;
-        return 2;
+        return result;
     }, this);
 
     return this;

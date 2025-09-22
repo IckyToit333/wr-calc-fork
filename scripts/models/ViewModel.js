@@ -1,3 +1,18 @@
+var calculateResultIndex = function (homeScore, awayScore) {
+    var home = parseInt(homeScore, 10);
+    var away = parseInt(awayScore, 10);
+
+    if (isNaN(home) || isNaN(away)) {
+        return null;
+    }
+
+    if (home > away + 15) return 0;
+    if (home > away) return 1;
+    if (away > home + 15) return 4;
+    if (away > home) return 3;
+    return 2;
+};
+
 // Overall view model for the page
 var ViewModel = function (source) {
     this.source = source; // mru or wru - doesn't really matter, just goes back into the query
@@ -132,10 +147,11 @@ var ViewModel = function (source) {
                 //if (e.alreadyInRankings) return null;
 
                 var t = (e.homeId() || e.awayId()) ? ('t' + (e.homeId() ?? '') + 'v' + (e.awayId() ?? '')) : '';
-                var s = (!isNaN(e.homeScore()) || !isNaN(e.awayScore())) ? ('s' + (!isNaN(e.homeScore()) ? e.homeScore() : '') + '-' + (!isNaN(e.awayScore()) ? e.awayScore() : '')) : '';
+                var result = parseInt(e.result(), 10);
+                var r = !isNaN(result) ? ('r' + result) : '';
                 var f = (e.noHome() || e.isRwc() || e.switched()) ? ('f' + ((e.noHome() ? 1 : 0) + (e.isRwc() ? 2 : 0) + (e.switched() ? 4 : 0))) : '';
 
-                return (t || s || f) ? (t + s + f) : null;
+                return (t || r || f) ? (t + r + f) : null;
             }).join(';');
         },
         write: function (value) {
@@ -149,8 +165,7 @@ var ViewModel = function (source) {
                         var fixture = new FixtureViewModel(me);
                         fixture.homeId(rs[0]);
                         fixture.awayId(rs[1]);
-                        fixture.homeScore(rs[2]);
-                        fixture.awayScore(rs[3]);
+                        fixture.result(calculateResultIndex(rs[2], rs[3]));
                         fixture.noHome(rs[4]);
                         fixture.isRwc(rs[5]);
                         fixture.switched(false);
@@ -162,7 +177,7 @@ var ViewModel = function (source) {
                     var fs = [];
                     var me = this;
                     $.each(versionAndString[1].split(';'), function (i, e) {
-                        var m = e.match(/^(t(\d*)v(\d*))?(s(\d*)-(\d*))?(f(\d+))?$/);
+                        var m = e.match(/^(t(\d*)v(\d*))?(s(\d*)-(\d*))?(r([0-4]))?(f(\d+))?$/);
                         if (!m) return;
                         var fixture = new FixtureViewModel(me);
                         if (m[1]) {
@@ -170,11 +185,13 @@ var ViewModel = function (source) {
                             fixture.awayId(m[3]);
                         }
                         if (m[4]) {
-                            fixture.homeScore(m[5]);
-                            fixture.awayScore(m[6]);
+                            fixture.result(calculateResultIndex(m[5], m[6]));
                         }
                         if (m[7]) {
-                            var flags = parseInt(m[8]);
+                            fixture.result(parseInt(m[8], 10));
+                        }
+                        if (m[9]) {
+                            var flags = parseInt(m[10]);
                             fixture.noHome((flags & 1) == 1);
                             fixture.isRwc((flags & 2) == 2);
                             fixture.switched((flags & 4) == 4);

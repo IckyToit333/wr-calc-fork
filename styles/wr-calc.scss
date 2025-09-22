@@ -451,6 +451,10 @@ body {
         input[type=number] {
             width: 3em;
         }
+
+        td.outcome select {
+            width: 100%;
+        }
     }
 }
 

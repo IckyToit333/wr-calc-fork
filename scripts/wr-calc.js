@@ -226,8 +226,7 @@ var fixturesLoaded = function (fixtures, rankings) {
             // C is complete.
             // L1/LH/L2 are I believe the codes for 1st half, half time, 2nd half but I forgot.
             if (e.status !== 'U' && e.status !== 'UP' && e.status !== 'CC') {
-                fixture.homeScore(e.scores[0]);
-                fixture.awayScore(e.scores[1]);
+                fixture.result(calculateResultIndex(e.scores[0], e.scores[1]));
             }
             switch (e.status) {
                 case 'U': {
