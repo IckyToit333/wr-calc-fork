@@ -23,6 +23,7 @@ var FixtureViewModel = function (parent) {
     this.liveScoreMode = null;
     this.kickoff = null;
     this.alreadyInRankings = false;
+    this.canEditTeams = ko.observable(true);
 
     // Placeholder captions used until teams are selected in the fixture row.
     this.homeCaption = 'Home...';
@@ -83,18 +84,24 @@ var FixtureViewModel = function (parent) {
     }, this);
 
     this.getChangeValue = function (index) {
+
         var changes = self.changes();
         if (!changes || typeof index === 'undefined') {
+
+   
+
             return null;
         }
 
         var change = changes[index];
+
         if (typeof change !== 'number' || isNaN(change)) {
             return null;
         }
 
         return change;
     };
+
 
     this.getChangeDisplay = function (index) {
         var change = self.getChangeValue(index);
@@ -149,6 +156,19 @@ var FixtureViewModel = function (parent) {
 
         return result;
     }, this);
+
+    this.preventCheckboxToggle = function (_, event) {
+        if (event) {
+            if (typeof event.preventDefault === 'function') {
+                event.preventDefault();
+            }
+            if (typeof event.stopPropagation === 'function') {
+                event.stopPropagation();
+            }
+        }
+
+        return false;
+    };
 
     return this;
 };

@@ -20,10 +20,10 @@
 <body>
     <div id="union">
         <a data-bind="css: source == 'mru' ? 'sel' : '', attr: { href: $data.source == 'mru' ? null : '?s=mru' }">
-            MRU
+            Men's
         </a>
         <a data-bind="css: source == 'wru' ? 'sel' : '', attr: { href: $data.source == 'wru' ? null : '?s=wru' }">
-            WRU
+            Women's
         </a>
     </div>
     <div id="leftright">
@@ -80,7 +80,6 @@
                             <th colspan="2">Away team</th>
                             <th title='No Home Advantage'>NHA</th>
                             <th title='Is Rugby World Cup match'>RWC</th>
-                            <th></th>
                     </tr>
                     </thead>
                     <!-- ko foreach: fixtures -->
@@ -89,23 +88,27 @@
                         <tr class="details">
                             <td class="details-left" colspan="2" data-bind="text: kickoff" title="Kickoff in your browser time"></td>
                             <td class="details-center" colspan="4" data-bind="text: ($data.eventPhase && $data.liveScoreMode) ? ($data.eventPhase + ' (' + $data.liveScoreMode + ')') : ($data.eventPhase || $data.liveScoreMode)"></td>
-                            <td class="details-right" colspan="5" data-bind="text: venueNameAndCountry, title: venueCity"></td>
+                            <td class="details-right" colspan="4" data-bind="text: venueNameAndCountry, title: venueCity"></td>
                         </tr>
                         <!-- /ko -->
                         <tr class="teams">
-                            <td colspan="2" style="text-align: left"><select data-bind="options: $parent.teams, optionsText: 'displayName', optionsValue: 'id', value: homeId, optionsCaption: homeCaption, disabled: alreadyInRankings"></select></td colspan="2">
+                            <td colspan="2" style="text-align: left"><select data-bind="options: $parent.teams, optionsText: 'displayName', optionsValue: 'id', value: homeId, optionsCaption: homeCaption, disabled: !$data.canEditTeams() || $data.alreadyInRankings"></select></td colspan="2">
                             <td colspan="4" class="outcome" style="text-align: center">
                                 <select data-bind="options: outcomeOptions, optionsText: 'label', optionsValue: 'value', optionsCaption: outcomeCaption, value: result, valueAllowUnset: true, disabled: alreadyInRankings"></select>
                             </td>
-                            <td colspan="2" style="text-align: right"><select data-bind="options: $parent.teams, optionsText: 'displayName', optionsValue: 'id', value: awayId, optionsCaption: awayCaption, disabled: alreadyInRankings"></select></td colspan="2">
+                            <td colspan="2" style="text-align: right"><select data-bind="options: $parent.teams, optionsText: 'displayName', optionsValue: 'id', value: awayId, optionsCaption: awayCaption, disabled: !$data.canEditTeams() || $data.alreadyInRankings"></select></td colspan="2">
                             <td>
-                                <input type="checkbox" data-bind="checked: noHome, disabled: alreadyInRankings" />
+                                <input type="checkbox" data-bind="checked: noHome, click: preventCheckboxToggle, event: { keydown: preventCheckboxToggle }" />
                                 <span data-bind="if: switched" title="Home team is nominally Away">*</span>
                             </td>
-                            <td><input type="checkbox" data-bind="checked: isRwc, disabled: alreadyInRankings" /></td>
+
+                            <td><input type="checkbox" data-bind="checked: isRwc, click: preventCheckboxToggle, event: { keydown: preventCheckboxToggle }" /></td>
                             <td><button data-bind="click: function () { $parent.fixtures.remove($data); }, disabled: alreadyInRankings">x</button></td>
+                        
+
                         </tr>
                         <!-- ko if: $data.hasValidTeams() && !$data.alreadyInRankings -->
+
                         <tr class="possible-changes possible-changes--panel">
                             <td colspan="11">
                                 <div class="fixture-change-panel">
@@ -130,6 +133,7 @@
                         <!-- ko if: alreadyInRankings -->
                         <tr class="possible-changes possible-changes--message">
                             <td colspan="8" class="details-center" title="The match is complete and kicked off 90 minutes or more before the latest rankings, so assume it is already included">Already ranked*</td>
+
                             <td colspan="3"></td>
                         </tr>
                         <!-- /ko -->
@@ -155,13 +159,9 @@
                             <td></td>
                             <td></td>
                             <td></td>
-                            <td></td>
                         </tr>
                     </tfoot>
                 </table>
-            </div>
-            <div id="addrow">
-                <button onclick='addFixture();'></button>
             </div>
         </div>
     </div>
