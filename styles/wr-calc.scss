@@ -402,8 +402,9 @@ body {
             margin-bottom: (56px / 2) + 2px;
         }
 
-        tr.details td, tr.possible-changes td {
+        tr.details td {
             font-size: 9px;
+
             &.details-left {
                 text-align: left;
             }
@@ -413,6 +414,150 @@ body {
             &.details-right {
                 text-align: right;
             }
+        }
+
+        td.details-left {
+            text-align: left;
+        }
+
+        td.details-center {
+            text-align: center;
+        }
+
+        td.details-right {
+            text-align: right;
+        }
+
+        tr.possible-changes {
+            background-color: transparent !important;
+        }
+
+        tr.possible-changes--panel td {
+            padding: 0;
+            border-top: none;
+            border-bottom: none;
+        }
+
+        tr.possible-changes--message td {
+            font-size: 11px;
+            padding: 6px 4px;
+        }
+
+        .fixture-change-panel {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: stretch;
+            justify-content: center;
+            gap: 12px;
+            background: lighten($primary-1, 48%);
+            border-radius: 16px;
+            padding: 16px;
+            box-shadow: 0 6px 18px rgba($black, 0.08);
+            width: 100%;
+        }
+
+        .fixture-change-panel__team {
+            flex: 0 0 auto;
+            min-width: 120px;
+            text-align: center;
+            border-radius: 12px;
+            padding: 12px 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            box-shadow: 0 4px 12px rgba($black, 0.06);
+        }
+
+        .fixture-change-panel__team--home {
+            background: lighten($primary-1, 36%);
+        }
+
+        .fixture-change-panel__team--away {
+            background: lighten($primary-1, 42%);
+        }
+
+        .fixture-change-panel__label {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: rgba($black, 0.54);
+        }
+
+        .fixture-change-panel__value {
+            font-size: 22px;
+            font-weight: 500;
+            color: rgba($black, 0.87);
+        }
+
+        .fixture-change-panel__outcomes {
+            flex: 1 1 320px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 12px;
+        }
+
+        .change-chip {
+            min-width: 130px;
+            padding: 14px 18px;
+            border-radius: 999px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+            background: lighten($primary-1, 42%);
+            box-shadow: 0 4px 12px rgba($black, 0.05);
+            transition: box-shadow 0.2s ease-in-out, transform 0.2s ease-in-out;
+        }
+
+        .change-chip__label {
+            font-size: 11px;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            color: rgba($black, 0.54);
+        }
+
+        .change-chip__value {
+            font-size: 20px;
+            font-weight: 500;
+            color: rgba($black, 0.87);
+        }
+
+        .change-chip--positive {
+            background: lighten($primary-1, 35%);
+        }
+
+        .change-chip--positive .change-chip__value {
+            color: $primary-2;
+        }
+
+        .change-chip--positive .change-chip__label {
+            color: rgba($primary-2, 0.75);
+        }
+
+        .change-chip--negative {
+            background: lighten($accent, 45%);
+        }
+
+        .change-chip--negative .change-chip__value {
+            color: $accent;
+        }
+
+        .change-chip--negative .change-chip__label {
+            color: rgba($accent, 0.75);
+        }
+
+        .change-chip--neutral {
+            background: lighten($primary-1, 45%);
+        }
+
+        .change-chip--active {
+            box-shadow: 0 10px 24px rgba($black, 0.15);
+            transform: translateY(-2px);
+        }
+
+        .change-chip--empty {
+            opacity: 0.45;
         }
 
         th, td {

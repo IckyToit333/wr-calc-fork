@@ -10,6 +10,7 @@ var FIXTURE_OUTCOME_OPTIONS = [
 ];
 
 var FixtureViewModel = function (parent) {
+    var self = this;
     this.homeId = ko.observable();
     this.awayId = ko.observable();
     this.result = ko.observable();
@@ -81,17 +82,59 @@ var FixtureViewModel = function (parent) {
         ];
     }, this);
 
-    this.getDisplayChange = function(index) {
-        var changes = this.changes();
-        if (!changes) return null;
+    this.getChangeValue = function (index) {
+        var changes = self.changes();
+        if (!changes || typeof index === 'undefined') {
+            return null;
+        }
+
         var change = changes[index];
-        if (isNaN(change)) return null;
+        if (typeof change !== 'number' || isNaN(change)) {
+            return null;
+        }
 
-        var formattedChange = Math.abs(change).toFixed(2);
-        var prefix = change > 0 ? '<' : '';
-        var suffix = change < 0 ? '>' : '';
+        return change;
+    };
 
-        return prefix + formattedChange + suffix;
+    this.getChangeDisplay = function (index) {
+        var change = self.getChangeValue(index);
+
+        if (change === null) {
+            return '—';
+        }
+
+        var formatted = Math.abs(change).toFixed(2);
+        if (change > 0) {
+            return '+' + formatted;
+        }
+        if (change < 0) {
+            return '-' + formatted;
+        }
+
+        return formatted;
+    };
+
+    this.getChangeClasses = function (index) {
+        var change = self.getChangeValue(index);
+        var isActive = typeof self.activeChange === 'function' && self.activeChange() === index;
+        var classes = {
+            'change-chip--active': isActive
+        };
+
+        if (change === null) {
+            classes['change-chip--empty'] = true;
+            return classes;
+        }
+
+        if (change > 0) {
+            classes['change-chip--positive'] = true;
+        } else if (change < 0) {
+            classes['change-chip--negative'] = true;
+        } else {
+            classes['change-chip--neutral'] = true;
+        }
+
+        return classes;
     };
 
     this.activeChange = ko.computed(function () {
