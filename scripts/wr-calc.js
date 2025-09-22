@@ -5,8 +5,10 @@ var usp = new URLSearchParams(s);
 var dateString = usp.get('d');
 var fixturesString = usp.get('f');
 
-var sourceString = usp.has('w') ? 'wru' : usp.get('s'); // support ?w for older links
-if (!sourceString) {
+var sourceString = 'mru';
+if (usp.has('w') || usp.get('s') === 'wru') { // support ?w for older links
+    sourceString = 'wru';
+} else if (usp.get('s') === 'mru') {
     sourceString = 'mru';
 }
 
@@ -81,20 +83,7 @@ var loadRankings = function (rankingsSource, startDate, fixtures, event) {
     });
 };
 
-if (sourceString == 'mru' || sourceString == 'wru') {
-    loadRankings(sourceString, dateString)
-} else {
-    // load the event!
-    $.get('https://api.wr-rims-prod.pulselive.com/rugby/v3/event/' + sourceString + '/schedule?language=en').done(function (data) {
-
-        loadRankings(
-            data.event.sport,
-            data.event.start.label,// maybe subtract a day so we don't include rankings on that date?
-            data.matches,
-            data.event
-        );
-    });
-}
+loadRankings(sourceString, dateString);
 
 // Helper to add a fixture to the top/bottom.
 // If we had up/down buttons we could maybe get rid of this.
