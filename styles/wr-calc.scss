@@ -452,8 +452,16 @@ body {
             width: 3em;
         }
 
-        td.outcome select {
-            width: 100%;
+        td.outcome {
+            min-width: 220px;
+
+            @include smallscreen {
+                min-width: 0;
+            }
+
+            select {
+                width: 100%;
+            }
         }
     }
 }
