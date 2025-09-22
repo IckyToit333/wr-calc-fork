@@ -5,6 +5,7 @@ var usp = new URLSearchParams(s);
 var sourceString = 'mru';
 var sourceNeedsUpdate = false;
 
+
 if (usp.has('w')) { // support ?w for older links but normalise to ?s
     sourceString = 'wru';
     usp.delete('w');
