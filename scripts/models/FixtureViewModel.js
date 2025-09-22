@@ -81,19 +81,6 @@ var FixtureViewModel = function (parent) {
         ];
     }, this);
 
-    this.getDisplayChange = function(index) {
-        var changes = this.changes();
-        if (!changes) return null;
-        var change = changes[index];
-        if (isNaN(change)) return null;
-
-        var formattedChange = Math.abs(change).toFixed(2);
-        var prefix = change > 0 ? '<' : '';
-        var suffix = change < 0 ? '>' : '';
-
-        return prefix + formattedChange + suffix;
-    };
-
     this.activeChange = ko.computed(function () {
         if (!this.isValid()) {
             return null;

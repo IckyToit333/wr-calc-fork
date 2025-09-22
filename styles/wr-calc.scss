@@ -402,8 +402,9 @@ body {
             margin-bottom: (56px / 2) + 2px;
         }
 
-        tr.details td, tr.possible-changes td {
+        tr.possible-changes td, tr.details td {
             font-size: 9px;
+
             &.details-left {
                 text-align: left;
             }
@@ -413,6 +414,10 @@ body {
             &.details-right {
                 text-align: right;
             }
+        }
+
+        tr.possible-changes {
+            background-color: lighten($primary-1, 52%);
         }
 
         th, td {
