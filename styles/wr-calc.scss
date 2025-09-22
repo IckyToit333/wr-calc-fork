@@ -497,63 +497,6 @@ body {
             color: rgba($black, 0.87);
         }
 
-        .fixture-change-panel__outcomes {
-            flex: 1 1 320px;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 12px;
-        }
-
-        .change-chip {
-            min-width: 130px;
-            padding: 14px 18px;
-            border-radius: 999px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 6px;
-            background: lighten($primary-1, 42%);
-            box-shadow: 0 4px 12px rgba($black, 0.05);
-            transition: box-shadow 0.2s ease-in-out, transform 0.2s ease-in-out;
-        }
-
-        .change-chip__label {
-            font-size: 11px;
-            letter-spacing: 0.06em;
-            text-transform: uppercase;
-            color: rgba($black, 0.54);
-        }
-
-        .change-chip--positive {
-            background: lighten($primary-1, 35%);
-        }
-
-        .change-chip--positive .change-chip__label {
-            color: rgba($primary-2, 0.75);
-        }
-
-        .change-chip--negative {
-            background: lighten($accent, 45%);
-        }
-
-        .change-chip--negative .change-chip__label {
-            color: rgba($accent, 0.75);
-        }
-
-        .change-chip--neutral {
-            background: lighten($primary-1, 45%);
-        }
-
-        .change-chip--active {
-            box-shadow: 0 10px 24px rgba($black, 0.15);
-            transform: translateY(-2px);
-        }
-
-        .change-chip--empty {
-            opacity: 0.45;
-        }
-
         th, td {
             padding: 0 4px;
         }
