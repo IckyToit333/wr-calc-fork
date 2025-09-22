@@ -612,14 +612,13 @@ body {
 #addrow {
     position: relative;
 
+    td.outcome {
+        @include smallscreen {
+            min-width: 0;
+        }
 
-            @include smallscreen {
-                min-width: 0;
-            }
-
-            select {
-                width: 100%;
-            }
+        select {
+            width: 100%;
         }
     }
 }
