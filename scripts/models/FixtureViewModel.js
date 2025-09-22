@@ -16,7 +16,7 @@ var FixtureViewModel = function (parent) {
     this.kickoff = null;
     this.alreadyInRankings = false;
 
-    // Only set elsewhere for "event" mode
+    // Placeholder captions used until teams are selected in the fixture row.
     this.homeCaption = 'Home...';
     this.awayCaption = 'Away...';
     this.eventPhase = null;

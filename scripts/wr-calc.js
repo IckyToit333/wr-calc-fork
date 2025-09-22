@@ -2,20 +2,36 @@
 var s = location.search;
 var usp = new URLSearchParams(s);
 
+var sourceString = 'mru';
+var sourceNeedsUpdate = false;
+
+if (usp.has('w')) { // support ?w for older links but normalise to ?s
+    sourceString = 'wru';
+    usp.delete('w');
+    sourceNeedsUpdate = true;
+} else if (usp.get('s') === 'wru') {
+    sourceString = 'wru';
+} else if (usp.get('s') === 'mru') {
+    sourceString = 'mru';
+} else if (usp.has('s')) {
+    sourceNeedsUpdate = true;
+}
+
+if (sourceNeedsUpdate) {
+    usp.set('s', sourceString);
+    var updatedQuery = usp.toString();
+    history.replaceState(null, '', updatedQuery ? ('?' + updatedQuery) : location.pathname);
+}
+
 var dateString = usp.get('d');
 var fixturesString = usp.get('f');
-
-var sourceString = usp.has('w') ? 'wru' : usp.get('s'); // support ?w for older links
-if (!sourceString) {
-    sourceString = 'mru';
-}
 
 // Create the view model and bind it to the HTML.
 var viewModel = new ViewModel(sourceString);
 ko.applyBindings(viewModel);
 
 // Load rankings from World Rugby.
-var loadRankings = function (rankingsSource, startDate, fixtures, event) {
+var loadRankings = function (rankingsSource, startDate) {
     viewModel.rankingsSource(rankingsSource);
     $.get('https://api.wr-rims-prod.pulselive.com/rugby/v3/rankings/' + rankingsSource + (startDate ? ('?date=' + startDate) : '')).done(function (data) {
         var rankings = {};
@@ -28,16 +44,6 @@ var loadRankings = function (rankingsSource, startDate, fixtures, event) {
             rankings[e.team.id] = new RankingViewModel(e);
         });
         viewModel.rankingsById(rankings);
-
-        if (event) {
-            // Restrict selectable teams to those in the event
-            var eventTeamIds = {};
-            $.each(fixtures, function (i, e) {
-                if (e.teams[0] && e.teams[0].id != '0') eventTeamIds[e.teams[0].id] = true;
-                if (e.teams[1] && e.teams[1].id != '0') eventTeamIds[e.teams[1].id] = true;
-            });
-            viewModel.teams.remove(function (t) { return !eventTeamIds[t.id]});
-        }
 
         var sorted = [];
         $.each(rankings, function (i, r) {
@@ -71,30 +77,13 @@ var loadRankings = function (rankingsSource, startDate, fixtures, event) {
             });
         } else {
             // This should be parallelisable if we have our observables set up properly. (Fixture validity depends on teams.)
-            if (fixtures) {
-                fixturesLoaded(fixtures, rankings, event);
-            } else {
-                addFixture();
-                loadFixtures(rankings, !!dateString);
-            }
+            addFixture();
+            loadFixtures(rankings, !!dateString);
         }
     });
 };
 
-if (sourceString == 'mru' || sourceString == 'wru') {
-    loadRankings(sourceString, dateString)
-} else {
-    // load the event!
-    $.get('https://api.wr-rims-prod.pulselive.com/rugby/v3/event/' + sourceString + '/schedule?language=en').done(function (data) {
-
-        loadRankings(
-            data.event.sport,
-            data.event.start.label,// maybe subtract a day so we don't include rankings on that date?
-            data.matches,
-            data.event
-        );
-    });
-}
+loadRankings(sourceString, dateString);
 
 // Helper to add a fixture to the top/bottom.
 // If we had up/down buttons we could maybe get rid of this.
@@ -141,7 +130,7 @@ var loadFixtures = function(rankings, specifiedDate) {
     getFixtures([], 0, fixturesLoaded);
 }
 
-var fixturesLoaded = function (fixtures, rankings, event) {
+var fixturesLoaded = function (fixtures, rankings) {
     // N.B. since we add to the top, these get reversed, so reverse the order here!
     fixtures.reverse();
 
@@ -227,20 +216,7 @@ var fixturesLoaded = function (fixtures, rankings, event) {
                     }
                 });
             }
-            fixture.isRwc((event && event.rankingsWeight == 2) || (e.events.length > 0 && e.events[0].rankingsWeight == 2) || (!!e.competition.match(/Rugby World Cup/)));
-
-            if (event) {
-                function shortenPhase(name) {
-                    return name && name.replace(/[a-z]+-final/, 'F').replace('Runner-up P', '2nd P').replace('Runner-up S', 'Loser S');
-                }
-                fixture.eventPhase = shortenPhase(e.eventPhase);
-                if (e.teams[0].id == '0' && e.teams[0].name) {
-                    fixture.homeCaption = shortenPhase(e.teams[0].name);
-                }
-                if (e.teams[1].id == '0' && e.teams[1].name) {
-                    fixture.awayCaption = shortenPhase(e.teams[1].name);
-                }
-            }
+            fixture.isRwc((e.events.length > 0 && e.events[0].rankingsWeight == 2) || (!!e.competition.match(/Rugby World Cup/)));
 
             // If the match isn't unstarted (or doesn't not have live scores), add
             // the live score.
