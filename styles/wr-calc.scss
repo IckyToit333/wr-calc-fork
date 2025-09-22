@@ -153,9 +153,9 @@ table {
         overflow-x: hidden;
         flex: 1;
         gap: 32px;
-        padding: 24px 32px 32px;
+        padding: 24px 24px 32px;
         margin: 0 auto;
-        max-width: 1200px;
+        max-width: 1440px;
         box-sizing: border-box;
         align-items: stretch;
 
@@ -166,7 +166,7 @@ table {
     #left {
         @include height(6);
         height: 100%;
-        flex: 0.5;
+        flex: 1 1 0;
         display: flex;
         flex-direction: column;
     }
@@ -175,7 +175,7 @@ table {
         height: 100%;
         display: flex;
         flex-direction: column;
-        flex: 1;
+        flex: 1 1 0;
     }
     #left, #right {
     .header h3 {
@@ -223,9 +223,9 @@ body {
     @extend %white;
     background-color: transparent;
     width: 100%;
-    max-width: 1200px;
+    max-width: 1440px;
     margin: 0 auto;
-    padding: 24px;
+    padding: 24px 16px;
     gap: 24px;
 }
 
