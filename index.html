@@ -93,11 +93,11 @@
                         </tr>
                         <!-- /ko -->
                         <tr class="teams">
-                            <td colspan="2" style="text-align: left"><select data-bind="options: $parent.teams, optionsText: 'displayName', optionsValue: 'id', value: homeId, optionsCaption: homeCaption, disabled: alreadyInRankings"></select></td colspan="2">
+                            <td colspan="2" style="text-align: left"><select data-bind="options: $parent.teams, optionsText: 'displayName', optionsValue: 'id', value: homeId, optionsCaption: homeCaption, disabled: !$data.canEditTeams() || $data.alreadyInRankings"></select></td colspan="2">
                             <td colspan="4" class="outcome" style="text-align: center">
                                 <select data-bind="options: outcomeOptions, optionsText: 'label', optionsValue: 'value', optionsCaption: outcomeCaption, value: result, valueAllowUnset: true, disabled: alreadyInRankings"></select>
                             </td>
-                            <td colspan="2" style="text-align: right"><select data-bind="options: $parent.teams, optionsText: 'displayName', optionsValue: 'id', value: awayId, optionsCaption: awayCaption, disabled: alreadyInRankings"></select></td colspan="2">
+                            <td colspan="2" style="text-align: right"><select data-bind="options: $parent.teams, optionsText: 'displayName', optionsValue: 'id', value: awayId, optionsCaption: awayCaption, disabled: !$data.canEditTeams() || $data.alreadyInRankings"></select></td colspan="2">
                             <td>
                                 <input type="checkbox" data-bind="checked: noHome, disabled: alreadyInRankings" />
                                 <span data-bind="if: switched" title="Home team is nominally Away">*</span>

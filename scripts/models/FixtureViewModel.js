@@ -22,6 +22,7 @@ var FixtureViewModel = function (parent) {
     this.liveScoreMode = null;
     this.kickoff = null;
     this.alreadyInRankings = false;
+    this.canEditTeams = ko.observable(true);
 
     // Placeholder captions used until teams are selected in the fixture row.
     this.homeCaption = 'Home...';
