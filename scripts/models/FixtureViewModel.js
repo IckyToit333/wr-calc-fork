@@ -83,48 +83,6 @@ var FixtureViewModel = function (parent) {
         ];
     }, this);
 
-    this.getChangeValue = function (index) {
-
-        var changes = self.changes();
-        if (!changes || typeof index === 'undefined') {
-
-   
-
-            return null;
-        }
-
-        var change = changes[index];
-
-        if (typeof change !== 'number' || isNaN(change)) {
-            return null;
-        }
-
-        return change;
-    };
-
-    this.getChangeClasses = function (index) {
-        var change = self.getChangeValue(index);
-        var isActive = typeof self.activeChange === 'function' && self.activeChange() === index;
-        var classes = {
-            'change-chip--active': isActive
-        };
-
-        if (change === null) {
-            classes['change-chip--empty'] = true;
-            return classes;
-        }
-
-        if (change > 0) {
-            classes['change-chip--positive'] = true;
-        } else if (change < 0) {
-            classes['change-chip--negative'] = true;
-        } else {
-            classes['change-chip--neutral'] = true;
-        }
-
-        return classes;
-    };
-
     this.activeChange = ko.computed(function () {
         if (!this.isValid()) {
             return null;

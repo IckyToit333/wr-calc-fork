@@ -116,11 +116,6 @@
                                         <span class="fixture-change-panel__label">Home rating</span>
                                         <span class="fixture-change-panel__value" data-bind="text: $data.homeRankingBefore() ? $data.homeRankingBefore().toFixed(2) : '—'"></span>
                                     </div>
-                                    <div class="fixture-change-panel__outcomes" data-bind="foreach: $data.outcomeOptions">
-                                        <div class="change-chip" data-bind="css: $parent.getChangeClasses($index())">
-                                            <span class="change-chip__label" data-bind="text: label"></span>
-                                        </div>
-                                    </div>
                                     <div class="fixture-change-panel__team fixture-change-panel__team--away">
                                         <span class="fixture-change-panel__label">Away rating</span>
                                         <span class="fixture-change-panel__value" data-bind="text: $data.awayRankingBefore() ? $data.awayRankingBefore().toFixed(2) : '—'"></span>
