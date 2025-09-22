@@ -102,25 +102,6 @@ var FixtureViewModel = function (parent) {
         return change;
     };
 
-
-    this.getChangeDisplay = function (index) {
-        var change = self.getChangeValue(index);
-
-        if (change === null) {
-            return '—';
-        }
-
-        var formatted = Math.abs(change).toFixed(2);
-        if (change > 0) {
-            return '+' + formatted;
-        }
-        if (change < 0) {
-            return '-' + formatted;
-        }
-
-        return formatted;
-    };
-
     this.getChangeClasses = function (index) {
         var change = self.getChangeValue(index);
         var isActive = typeof self.activeChange === 'function' && self.activeChange() === index;
