@@ -82,17 +82,30 @@ var FixtureViewModel = function (parent) {
         ];
     }, this);
 
-    this.getDisplayChange = function(index) {
+    this.getChangeValue = function (index) {
         var changes = this.changes();
-        if (!changes) return null;
+        if (!changes) {
+            return null;
+        }
+
         var change = changes[index];
-        if (isNaN(change)) return null;
+        if (isNaN(change)) {
+            return null;
+        }
+
+        return change;
+    };
+
+    this.getDisplayChange = function(index) {
+        var change = this.getChangeValue(index);
+        if (change === null) {
+            return '';
+        }
 
         var formattedChange = Math.abs(change).toFixed(2);
-        var prefix = change > 0 ? '<' : '';
-        var suffix = change < 0 ? '>' : '';
+        var prefix = change > 0 ? '+' : change < 0 ? '−' : '';
 
-        return prefix + formattedChange + suffix;
+        return prefix + formattedChange;
     };
 
     this.activeChange = ko.computed(function () {

@@ -402,8 +402,11 @@ body {
             margin-bottom: (56px / 2) + 2px;
         }
 
-        tr.details td, tr.possible-changes td {
-            font-size: 9px;
+        tr.details td {
+            font-size: 11px;
+            padding: 6px 4px;
+            color: rgba($black, 0.6);
+
             &.details-left {
                 text-align: left;
             }
@@ -412,6 +415,78 @@ body {
             }
             &.details-right {
                 text-align: right;
+            }
+        }
+
+        tr.possible-changes {
+            background-color: lighten($primary-1, 52%);
+        }
+
+        tr.possible-changes td {
+            padding: 12px 4px 14px;
+            vertical-align: top;
+            font-size: 12px;
+            color: rgba($black, 0.65);
+
+            &.details-left {
+                text-align: left;
+            }
+            &.details-center {
+                text-align: center;
+            }
+            &.details-right {
+                text-align: right;
+            }
+        }
+
+        tr.possible-changes td .change-chip {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 56px;
+            padding: 6px 12px;
+            font-size: 12px;
+            font-weight: 500;
+            line-height: 1.1;
+            border-radius: 999px;
+            letter-spacing: 0.01em;
+            background-color: rgba($white, 0.9);
+            box-shadow: 0 2px 4px rgba($black, 0.12);
+            color: rgba($black, 0.64);
+            transition: background-color 0.15s ease-in-out, color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+
+            &.change-chip--rating {
+                min-width: auto;
+                padding: 6px 10px;
+                background-color: lighten($primary-1, 36%);
+                color: rgba($black, 0.72);
+                font-weight: 600;
+            }
+
+            &.change-chip--delta {
+                background-color: lighten($primary-1, 42%);
+            }
+
+            &.change-chip--positive {
+                background-color: rgba($primary-2, 0.16);
+                color: $primary-2;
+            }
+
+            &.change-chip--negative {
+                background-color: rgba($accent, 0.18);
+                color: $accent;
+            }
+
+            &.change-chip--neutral {
+                background-color: lighten($primary-1, 38%);
+            }
+
+            &.change-chip--active {
+                box-shadow: 0 0 0 2px rgba($primary-2, 0.25);
+            }
+
+            &:empty {
+                display: none;
             }
         }
 
