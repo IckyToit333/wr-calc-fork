@@ -138,61 +138,35 @@ table {
 }
 
 @include largescreen() {
-    html {
-        height: 100%;
-    }
     body {
         display: flex;
         flex-direction: column;
-        height: 100%;
         align-items: center;
+        min-height: 100vh;
     }
     #leftright {
-        display: flex;
-        flex-direction: row;
-        overflow-x: hidden;
-        flex: 1;
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1.35fr);
+        align-items: start;
         gap: 32px;
-        padding: 24px 24px 32px;
+        padding: 32px 24px;
         margin: 0 auto;
         max-width: 1440px;
         box-sizing: border-box;
-        align-items: stretch;
-
-    }
-    #footer {
-        flex: 0;
     }
     #left {
         @include height(6);
-        height: 100%;
-
-        flex: 1 1 40%;
-        display: flex;
-        flex-direction: column;
     }
     #right {
         @include height(0);
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-        flex: 1 1 60%;
     }
     #left, #right {
-    .header h3 {
-            flex: 0;
+        align-self: stretch;
+    }
+    #left, #right {
+        .header h3 {
+            margin: 0;
         }
-    }
-    #which,#union {
-        flex-shrink: 0;
-    }
-    #rankings {
-        flex: 1;
-        overflow-y: scroll;
-    }
-    #fixtures {
-        flex: 1;
-        overflow-y: scroll;
     }
 }
 @include smallscreen() {
@@ -242,9 +216,12 @@ body {
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
     padding: 16px;
     overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
     .header {
         @extend %primary;
-        margin: -16px -16px 16px;
+        margin: -16px -16px 0;
         border-radius: 12px 12px 0 0;
 
         h3 {
