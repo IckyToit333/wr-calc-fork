@@ -109,7 +109,19 @@
                                 <div class="fixture-card__decision-column fixture-card__decision-column--left">
                                     <div class="fixture-card__team fixture-card__team--home">
                                         <span class="fixture-card__label">Home team</span>
-                                        <select data-bind="options: $parent.teams, optionsText: 'displayName', optionsValue: 'id', value: homeId, optionsCaption: homeCaption, disabled: !$data.canEditTeams() || $data.alreadyInRankings"></select>
+                                        <select 
+                                              appearance: none;    
+                                              webkit-appearance: none; 
+                                              moz-appearance: none;    
+                                            data-bind="options: 
+                                            $parent.teams, 
+                                            optionsText: 'displayName', 
+                                            optionsValue: 'id', 
+                                            value: homeId, 
+                                            optionsCaption: homeCaption, 
+                                            disabled: !$data.canEditTeams() || $data.alreadyInRankings">
+                        
+                                            </select>
                                         <span class="fixture-card__rating-badge" data-bind="text: $data.homeRankingBefore() ? $data.homeRankingBefore().toFixed(2) + ' pts' : '—'"></span>
                                     </div>
                                     <div class="fixture-card__outcome">
