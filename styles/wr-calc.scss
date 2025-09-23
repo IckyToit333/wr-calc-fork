@@ -82,34 +82,29 @@ $accent: #dd2c00;
  */
 body {
     font-family: 'Roboto', sans-serif;
-    font-size: 13px;
+    font-size: 16px;
     font-weight: 400;
 }
 h3 {
-    font-size: 20px;
+    font-size: 24px;
     font-weight: 500;
 }
 table {
     th {
-        font-size: 12px;
+        font-size: 14px;
         font-weight: 500;
     }
     td {
-        font-size: 13px;
+        font-size: 16px;
         font-weight: 400;
-        input, select {
-            font-size: 13px !important;
-            font-weight: 400 !important;
-            font-family: 'Roboto', sans-serif !important;
-        }
     }
 }
 #which, #union {
-    font-size: 14px;
+    font-size: 18px;
     font-weight: 500;
 }
 #footer { // can't really find a material match for this
-    font-size: 12px;
+    font-size: 14px;
     font-weight: 400;
 }
 
