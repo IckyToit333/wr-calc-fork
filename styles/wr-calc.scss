@@ -469,40 +469,68 @@ body {
         flex-direction: column;
         gap: 16px;
         background: $white;
-        border-radius: 16px;
-        border: 1px solid lighten($primary-1, 35%);
-        box-shadow: 0 10px 24px rgba($black, 0.08);
-        padding: 16px;
+        border-radius: 20px;
+        border: 1px solid lighten($primary-1, 32%);
+        box-shadow: 0 16px 32px rgba($black, 0.08);
+        padding: 20px;
     }
 
-    .fixture-card__meta {
+    .fixture-card__hero {
+        background: linear-gradient(135deg, lighten($primary-1, 20%), lighten($primary-1, 36%));
+        border-radius: 16px;
+        padding: 16px 20px;
+        color: rgba($white, 0.92);
+        box-shadow: inset 0 1px 0 rgba($white, 0.24);
+    }
+
+    .fixture-card__hero-meta {
         display: flex;
         flex-wrap: wrap;
-        gap: 8px 16px;
-        font-size: 11px;
-        color: rgba($black, 0.54);
+        align-items: center;
+        gap: 12px 24px;
+        font-size: 12px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+    }
 
-        .fixture-card__meta-item {
-            flex: 1 1 160px;
+    .fixture-card__hero-item {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        position: relative;
+
+        &::before {
+            content: '';
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 28px;
+            height: 28px;
+            border-radius: 999px;
+            background: rgba($white, 0.18);
+            box-shadow: inset 0 0 0 1px rgba($white, 0.18);
+            color: $white;
+            font-size: 14px;
         }
     }
 
-    .fixture-card__meta-item--kickoff {
-        text-align: left;
+    .fixture-card__hero-item--kickoff::before {
+        content: '⏰';
     }
 
-    .fixture-card__meta-item--phase {
-        text-align: center;
+    .fixture-card__hero-item--phase::before {
+        content: '🏁';
     }
 
-    .fixture-card__meta-item--venue {
-        text-align: right;
+    .fixture-card__hero-item--venue::before {
+        content: '🏟';
     }
 
     @include smallscreen {
-        .fixture-card__meta-item--phase,
-        .fixture-card__meta-item--venue {
-            text-align: left;
+        .fixture-card__hero-meta {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 10px;
         }
     }
 
@@ -518,34 +546,76 @@ body {
         gap: 8px;
     }
 
-    .fixture-card__section--teams {
-        gap: 12px;
+    .fixture-card__decision-board {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 24px;
+        background: lighten($primary-1, 54%);
+        border-radius: 18px;
+        padding: 20px;
+        border: 1px solid lighten($primary-1, 34%);
+        box-shadow: inset 0 0 0 1px rgba($white, 0.4);
+    }
 
-        @include largescreen {
-            flex-direction: row;
-            align-items: flex-end;
+    .fixture-card__decision-column {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .fixture-card__team,
+    .fixture-card__outcome {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .fixture-card__outcome {
+        margin-top: auto;
+    }
+
+    .fixture-card__team select,
+    .fixture-card__outcome select {
+        width: 100%;
+        min-height: 56px;
+        padding: 12px 16px;
+        border-radius: 14px;
+        border: 1px solid lighten($primary-1, 28%);
+        background: $white;
+        box-shadow: 0 4px 10px rgba($black, 0.05);
+        box-sizing: border-box;
+    }
+
+    .fixture-card__rating-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        align-self: flex-start;
+        padding: 6px 14px;
+        border-radius: 999px;
+        background: rgba($accent, 0.12);
+        color: darken($accent, 6%);
+        font-size: 12px;
+        font-weight: 600;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        box-shadow: inset 0 0 0 1px rgba($accent, 0.18);
+    }
+
+    .fixture-card__rating-badge::before {
+        content: '★';
+        font-size: 12px;
+    }
+
+    @include smallscreen {
+        .fixture-card__decision-board {
+            grid-template-columns: 1fr;
+            padding: 16px;
+            gap: 16px;
         }
 
-        .fixture-card__team,
         .fixture-card__outcome {
-            display: flex;
-            flex-direction: column;
-            gap: 6px;
-            flex: 1 1 0;
-        }
-
-        .fixture-card__outcome {
-            flex: 1.2 1 0;
-        }
-
-        select {
-            width: 100%;
-            min-height: 56px;
-            padding: 12px 16px;
-            border-radius: 12px;
-            border: 1px solid lighten($primary-1, 30%);
-            background: lighten($primary-1, 55%);
-            box-sizing: border-box;
+            margin-top: 0;
         }
     }
 
