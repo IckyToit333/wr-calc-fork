@@ -607,6 +607,8 @@ body {
         appearance: none;
         -webkit-appearance: none;
         -moz-appearance: none;
+        font: inherit;
+        color:inherit;
     }
 
     .fixture-card__rating-badge {
@@ -628,11 +630,22 @@ body {
   content: "▼"; /* or replace with an SVG background */
   position: absolute;
   right: 16px;
-  top: 50%;
+  top: 52%;
   transform: translateY(-50%);
   pointer-events: none; /* clicks go to the select */
   font-size: 0.9rem;
   color: #333;
+}
+    .fixture-card__outcome select:hover {
+  border-color: #666;        /* Darker border */
+  background: #f9f9f9;       /* Light gray background */
+  color: #222;               /* Slightly darker text */
+}
+
+/* When hovering over individual options in the open dropdown */
+.fixture-card__outcome select option:hover {
+  background: #eee;          /* Custom hover background */
+  color: #d00;               /* Custom hover text colour */
 }
 
     .fixture-card__rating-badge::before {
