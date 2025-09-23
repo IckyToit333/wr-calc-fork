@@ -9,7 +9,7 @@ $white: #ffffff;
 $primary: #4caf50;
 $primary-1: #a5d6a7;
 $primary-2: #388e3c;
-$accent: #dd2c00;
+$accent: #000080;
 
 /**
  * Apply background colour and matching text colour.
@@ -603,7 +603,6 @@ body {
     }
 
     .fixture-card__rating-badge::before {
-        content: '★';
         font-size: 12px;
     }
 
