@@ -476,10 +476,10 @@ body {
     }
 
     .fixture-card__hero {
-        background: linear-gradient(135deg, lighten($primary-1, 20%), lighten($primary-1, 36%));
+        background: linear-gradient(135deg, lighten($primary-1, 32%), lighten($primary-1, 46%));
         border-radius: 16px;
         padding: 16px 20px;
-        color: rgba($white, 0.92);
+        color: rgba($black, 0.88);
         box-shadow: inset 0 1px 0 rgba($white, 0.24);
     }
 
@@ -507,9 +507,9 @@ body {
             width: 28px;
             height: 28px;
             border-radius: 999px;
-            background: rgba($white, 0.18);
-            box-shadow: inset 0 0 0 1px rgba($white, 0.18);
-            color: $black;
+            background: rgba($black, 0.08);
+            box-shadow: inset 0 0 0 1px rgba($black, 0.12);
+            color: rgba($black, 0.72);
             font-size: 14px;
         }
     }
