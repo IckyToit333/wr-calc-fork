@@ -564,14 +564,51 @@ body {
   outline: none;             /* Remove blue focus ring */
 }
 
-.outcomes-button{
-      border: none;
-      background: transparent;
-      padding: 0;
-      font: inherit;
-      color: inherit;
+.outcomes-button {
+  appearance: none;          /* Remove default dropdown arrow */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+
+  border: none;              /* Remove border */
+  background: transparent;   /* No background */
+  padding: 0.5rem 2rem 0.5rem 0.5rem;                /* space for arrow */
+  font: inherit;             /* Inherit text font/size */
+  color: inherit;            /* Inherit text color */
+  cursor: pointer;           /* Still clickable */
+  line-height: 1.4;
 }
 
+/* Remove the blue highlight when focused */
+.outcomes-button:focus {
+  outline: none;
+}
+
+/* Custom hover (instead of default blue) */
+.outcomes-button:hover {
+  color: #444;               /* Change text color on hover */
+  background: none;          /* Prevent browser hover background */
+}
+
+/* Style the dropdown options (limited by browser support) */
+.outcomes-button option {
+  background: #fff;          /* Dropdown background */
+  color: #000;               /* Normal option text */
+}
+
+.outcomes-button option:hover {
+  background: #eee;          /* Custom hover background */
+  color: #d00;               /* Custom hover text color */
+}
+.outcomes-button::after {
+  content: "▼";
+  position: absolute;
+  right: 0.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  font-size: 0.8rem;
+  color: #333;
+}
 
 
     
