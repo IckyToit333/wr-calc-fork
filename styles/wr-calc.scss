@@ -397,158 +397,203 @@ body {
 #fixtures {
     padding: 10px 2px 0;
 
-    table {
-        margin: 0 auto;
-        width: 100%;
-        max-width: 100%;
-        border-collapse: collapse;
+    .fixtures-list {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+    }
 
-        @include largescreen {
-            margin-bottom: 24px + 56px + 2px;
+    .fixture-card {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        background: $white;
+        border-radius: 16px;
+        border: 1px solid lighten($primary-1, 35%);
+        box-shadow: 0 10px 24px rgba($black, 0.08);
+        padding: 16px;
+    }
+
+    .fixture-card__meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px 16px;
+        font-size: 11px;
+        color: rgba($black, 0.54);
+
+        .fixture-card__meta-item {
+            flex: 1 1 160px;
         }
-        @include smallscreen {
-            margin-bottom: (56px / 2) + 2px;
-        }
+    }
 
-        tr.details td {
-            font-size: 9px;
-            &.details-left {
-                text-align: left;
-            }
-            &.details-center {
-                text-align: center;
-            }
-            &.details-right {
-                text-align: right;
-            }
-        }
+    .fixture-card__meta-item--kickoff {
+        text-align: left;
+    }
 
+    .fixture-card__meta-item--phase {
+        text-align: center;
+    }
 
-        td.details-left {
+    .fixture-card__meta-item--venue {
+        text-align: right;
+    }
+
+    @include smallscreen {
+        .fixture-card__meta-item--phase,
+        .fixture-card__meta-item--venue {
             text-align: left;
         }
+    }
 
-        td.details-center {
-            text-align: center;
+    .fixture-card__content {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+    }
+
+    .fixture-card__section {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .fixture-card__section--teams {
+        gap: 12px;
+
+        @include largescreen {
+            flex-direction: row;
+            align-items: flex-end;
         }
 
-        td.details-right {
-            text-align: right;
-        }
-
-        tr.possible-changes {
-            background-color: transparent !important;
-        }
-
-        tr.possible-changes--panel td {
-            padding: 0;
-            border-top: none;
-            border-bottom: none;
-        }
-
-        tr.possible-changes--message td {
-            font-size: 11px;
-            padding: 6px 4px;
-        }
-
-        .fixture-change-panel {
-            display: flex;
-            flex-wrap: wrap;
-            align-items: stretch;
-            justify-content: center;
-            gap: 12px;
-            background: lighten($primary-1, 48%);
-            border-radius: 16px;
-            padding: 16px;
-            box-shadow: 0 6px 18px rgba($black, 0.08);
-            width: 100%;
-        }
-
-        .fixture-change-panel__team {
-            flex: 0 0 auto;
-            min-width: 120px;
-            text-align: center;
-            border-radius: 12px;
-            padding: 12px 16px;
+        .fixture-card__team,
+        .fixture-card__outcome {
             display: flex;
             flex-direction: column;
             gap: 6px;
-            box-shadow: 0 4px 12px rgba($black, 0.06);
+            flex: 1 1 0;
         }
 
-        .fixture-change-panel__team--home {
-            background: lighten($primary-1, 36%);
+        .fixture-card__outcome {
+            flex: 1.2 1 0;
         }
 
-        .fixture-change-panel__team--away {
-            background: lighten($primary-1, 42%);
+        select {
+            width: 100%;
+            min-height: 56px;
+            padding: 12px 16px;
+            border-radius: 12px;
+            border: 1px solid lighten($primary-1, 30%);
+            background: lighten($primary-1, 55%);
+            box-sizing: border-box;
         }
+    }
 
-        .fixture-change-panel__label {
-            font-size: 11px;
-            text-transform: uppercase;
-            letter-spacing: 0.08em;
-            color: rgba($black, 0.54);
+    .fixture-card__label {
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: rgba($black, 0.54);
+    }
+
+    .fixture-card__section--flags {
+        .fixture-card__label {
+            margin-bottom: 4px;
         }
+    }
 
-        .fixture-change-panel__value {
-            font-size: 22px;
-            font-weight: 500;
-            color: rgba($black, 0.87);
+    .fixture-card__flags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+    }
+
+    .fixture-card__flag {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 8px 12px;
+        border-radius: 999px;
+        background: lighten($primary-1, 48%);
+        box-shadow: inset 0 0 0 1px lighten($primary-1, 35%);
+        font-size: 12px;
+        color: rgba($black, 0.7);
+        cursor: pointer;
+
+        input {
+            margin: 0;
+            cursor: pointer;
         }
+    }
 
-        th, td {
-            padding: 0 4px;
+    .fixture-card__flag-note {
+        color: $accent;
+        font-weight: 500;
+    }
+
+    .possible-changes {
+        margin-top: 8px;
+    }
+
+    .possible-changes--panel {
+        padding: 0;
+    }
+
+    .possible-changes--message {
+        background: lighten($primary-1, 52%);
+        border-radius: 12px;
+        padding: 8px 12px;
+        text-align: center;
+
+        .possible-changes__text {
+            font-size: 12px;
+            color: rgba($black, 0.7);
         }
+    }
 
-        tbody tr {
-            transition: background-color 0.2s ease-in-out;
-        }
+    .fixture-change-panel {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: stretch;
+        justify-content: center;
+        gap: 12px;
+        background: lighten($primary-1, 48%);
+        border-radius: 16px;
+        padding: 16px;
+        box-shadow: 0 6px 18px rgba($black, 0.08);
+        width: 100%;
+    }
 
-        tbody tr:nth-child(odd) {
-            background-color: lighten($primary-1, 52%);
-        }
+    .fixture-change-panel__team {
+        flex: 0 0 auto;
+        min-width: 120px;
+        text-align: center;
+        border-radius: 12px;
+        padding: 12px 16px;
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        box-shadow: 0 4px 12px rgba($black, 0.06);
+    }
 
-        tbody tr:nth-child(even) {
-            background-color: $white;
-        }
+    .fixture-change-panel__team--home {
+        background: lighten($primary-1, 36%);
+    }
 
-        tbody tr:hover {
-            background-color: lighten($primary-1, 40%);
-        }
+    .fixture-change-panel__team--away {
+        background: lighten($primary-1, 42%);
+    }
 
-        tbody.fixture tr:first-child td {
-            padding-top: 10px;
-            border-top: 2px solid lighten($primary-1, 35%);
-        }
+    .fixture-change-panel__label {
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: rgba($black, 0.54);
+    }
 
-        tbody.fixture tr:last-child td {
-            border-bottom: 2px solid lighten($primary-1, 35%);
-        }
-
-        th {
-            @extend .secondaryText;
-        }
-
-        input[type=number] {
-            width: 3em;
-        }
-
-        td.outcome {
-            min-width: 220px;
-
-
-            @include smallscreen {
-                min-width: 0;
-            }
-
-            select {
-                width: 100%;
-                min-height: 64px;
-                padding: 12px 16px;
-                box-sizing: border-box;
-            }
-        }
+    .fixture-change-panel__value {
+        font-size: 22px;
+        font-weight: 500;
+        color: rgba($black, 0.87);
     }
 }
 

@@ -72,103 +72,68 @@
                 <h3>Fixtures</h3>
             </div>
             <div id="fixtures">
-                <table>
-                    <thead>
-                        <tr>
-                            <th colspan="2">Home team</th>
-                            <th colspan="4">Outcome</th>
-                            <th colspan="2">Away team</th>
-                            <th title='No Home Advantage'>NHA</th>
-                            <th title='Is Rugby World Cup match'>RWC</th>
-                    </tr>
-                    </thead>
+                <div class="fixtures-list">
                     <!-- ko foreach: fixtures -->
-                    <tbody class="fixture">
+                    <div class="fixture-card">
                         <!-- ko if: $data.venueNameAndCountry || $data.kickoff || $data.liveScoreMode || $data.eventPhase -->
-                        <tr class="details">
-                            <td class="details-left" colspan="2" data-bind="text: kickoff" title="Kickoff in your browser time"></td>
-                            <td class="details-center" colspan="4" data-bind="text: ($data.eventPhase && $data.liveScoreMode) ? ($data.eventPhase + ' (' + $data.liveScoreMode + ')') : ($data.eventPhase || $data.liveScoreMode)"></td>
-                            <td class="details-right" colspan="4" data-bind="text: venueNameAndCountry, title: venueCity"></td>
-                        </tr>
+                        <div class="fixture-card__meta">
+                            <div class="fixture-card__meta-item fixture-card__meta-item--kickoff" data-bind="text: kickoff" title="Kickoff in your browser time"></div>
+                            <div class="fixture-card__meta-item fixture-card__meta-item--phase" data-bind="text: ($data.eventPhase && $data.liveScoreMode) ? ($data.eventPhase + ' (' + $data.liveScoreMode + ')') : ($data.eventPhase || $data.liveScoreMode)"></div>
+                            <div class="fixture-card__meta-item fixture-card__meta-item--venue" data-bind="text: venueNameAndCountry, attr: { title: venueCity }"></div>
+                        </div>
                         <!-- /ko -->
-                        <tr class="teams">
-                            <td colspan="2" style="text-align: left">
-                                <select data-bind="options: $parent.teams, optionsText: 'displayName', optionsValue: 'id', value: homeId, optionsCaption: homeCaption, disabled: !$data.canEditTeams() || $data.alreadyInRankings">
-                                
-                            </select>
-                            </td colspan="2">
-                            <td colspan="4" class="outcome" style="text-align: center">
-                                <select data-bind="options: outcomeOptions, optionsText: 'label', optionsValue: 'value', optionsCaption: outcomeCaption, value: result, valueAllowUnset: true, disabled: alreadyInRankings">
-                                    
-                                </select>
-                            </td>
-                            <td colspan="2" style="text-align: right">
-                                <select data-bind="options: $parent.teams, optionsText: 'displayName', optionsValue: 'id', value: awayId, optionsCaption: awayCaption, disabled: !$data.canEditTeams() || $data.alreadyInRankings">
-                                
-                            </select>
-                            </td colspan="2">
-                            <td>
-                                <input type="checkbox" data-bind="checked: noHome, click: preventCheckboxToggle, event: { keydown: preventCheckboxToggle }" />
-                                <span data-bind="if: switched" title="Home team is nominally Away">*</span>
-                            </td>
-
-                            <td>
-                                <input type="checkbox" data-bind="checked: isRwc, click: preventCheckboxToggle, event: { keydown: preventCheckboxToggle }" />
-                            </td>
-                            <td>
-                            </td>
-                        
-
-                        </tr>
-                        <!-- ko if: $data.hasValidTeams() && !$data.alreadyInRankings -->
-
-                        <tr class="possible-changes possible-changes--panel">
-                            <td colspan="11">
-                                <div class="fixture-change-panel">
-                                    <div class="fixture-change-panel__team fixture-change-panel__team--home">
-                                        <span class="fixture-change-panel__label">Home rating</span>
-                                        <span class="fixture-change-panel__value" data-bind="text: $data.homeRankingBefore() ? $data.homeRankingBefore().toFixed(2) : '—'"></span>
-                                    </div>
-                                    <div class="fixture-change-panel__team fixture-change-panel__team--away">
-                                        <span class="fixture-change-panel__label">Away rating</span>
-                                        <span class="fixture-change-panel__value" data-bind="text: $data.awayRankingBefore() ? $data.awayRankingBefore().toFixed(2) : '—'"></span>
-                                    </div>
+                        <div class="fixture-card__content">
+                            <div class="fixture-card__section fixture-card__section--teams">
+                                <div class="fixture-card__team fixture-card__team--home">
+                                    <span class="fixture-card__label">Home team</span>
+                                    <select data-bind="options: $parent.teams, optionsText: 'displayName', optionsValue: 'id', value: homeId, optionsCaption: homeCaption, disabled: !$data.canEditTeams() || $data.alreadyInRankings"></select>
                                 </div>
-                            </td>
-                        </tr>
+                                <div class="fixture-card__outcome">
+                                    <span class="fixture-card__label">Outcome</span>
+                                    <select data-bind="options: outcomeOptions, optionsText: 'label', optionsValue: 'value', optionsCaption: outcomeCaption, value: result, valueAllowUnset: true, disabled: alreadyInRankings"></select>
+                                </div>
+                                <div class="fixture-card__team fixture-card__team--away">
+                                    <span class="fixture-card__label">Away team</span>
+                                    <select data-bind="options: $parent.teams, optionsText: 'displayName', optionsValue: 'id', value: awayId, optionsCaption: awayCaption, disabled: !$data.canEditTeams() || $data.alreadyInRankings"></select>
+                                </div>
+                            </div>
+                            <div class="fixture-card__section fixture-card__section--flags">
+                                <span class="fixture-card__label">Flags</span>
+                                <div class="fixture-card__flags">
+                                    <label class="fixture-card__flag" title="No Home Advantage">
+                                        <input type="checkbox" data-bind="checked: noHome, click: preventCheckboxToggle, event: { keydown: preventCheckboxToggle }" />
+                                        <span class="fixture-card__flag-text">NHA</span>
+                                        <span class="fixture-card__flag-note" data-bind="if: switched" title="Home team is nominally Away">*</span>
+                                    </label>
+                                    <label class="fixture-card__flag" title="Is Rugby World Cup match">
+                                        <input type="checkbox" data-bind="checked: isRwc, click: preventCheckboxToggle, event: { keydown: preventCheckboxToggle }" />
+                                        <span class="fixture-card__flag-text">RWC</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- ko if: $data.hasValidTeams() && !$data.alreadyInRankings -->
+                        <div class="possible-changes possible-changes--panel">
+                            <div class="fixture-change-panel">
+                                <div class="fixture-change-panel__team fixture-change-panel__team--home">
+                                    <span class="fixture-change-panel__label">Home rating</span>
+                                    <span class="fixture-change-panel__value" data-bind="text: $data.homeRankingBefore() ? $data.homeRankingBefore().toFixed(2) : '—'"></span>
+                                </div>
+                                <div class="fixture-change-panel__team fixture-change-panel__team--away">
+                                    <span class="fixture-change-panel__label">Away rating</span>
+                                    <span class="fixture-change-panel__value" data-bind="text: $data.awayRankingBefore() ? $data.awayRankingBefore().toFixed(2) : '—'"></span>
+                                </div>
+                            </div>
+                        </div>
                         <!-- /ko -->
                         <!-- ko if: alreadyInRankings -->
-                        <tr class="possible-changes possible-changes--message">
-                            <td colspan="8" class="details-center" title="The match is complete and kicked off 90 minutes or more before the latest rankings, so assume it is already included">Already ranked*</td>
-
-                            <td colspan="3"></td>
-                        </tr>
+                        <div class="possible-changes possible-changes--message">
+                            <div class="possible-changes__text" title="The match is complete and kicked off 90 minutes or more before the latest rankings, so assume it is already included">Already ranked*</div>
+                        </div>
                         <!-- /ko -->
-                    </tbody>
+                    </div>
                     <!-- /ko -->
-                    <!--
-                        trying to be clever and align the score cells like
-                        | HOME | AWAY |
-                        | <1 | 0 | 1> |
-                        by making this 2+2 and 1+2+1
-                        but Chrome seems to not want to align like this if no row has 4 cells there
-                        so we have to make an empty row with this many cells
-                    -->
-                    <tfoot aria-hidden="true">
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                    </tfoot>
-                </table>
+                </div>
             </div>
         </div>
     </div>
