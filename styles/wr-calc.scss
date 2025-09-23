@@ -10,6 +10,7 @@ $primary: #4caf50;
 $primary-1: #a5d6a7;
 $primary-2: #388e3c;
 $accent: #000080;
+$accent-1:#880808;
 
 /**
  * Apply background colour and matching text colour.
@@ -442,8 +443,8 @@ body {
 
         tr.ptsDown td.ptsDiff,
         tr.posDown td.posDiff {
-            background-color: rgba($accent, 0.15);
-            color: $accent;
+            background-color: rgba($accent-1, 0.15);
+            color: $accent-1;
 
             &::before {
                 content: '\25BC';
