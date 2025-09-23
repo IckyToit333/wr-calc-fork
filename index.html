@@ -18,13 +18,21 @@
 <script src="scripts/models/FixtureViewModel.js?v={{site.time|date:'%s'}}" type="text/javascript" ></script>
 </head>
 <body>
-    <div id="union">
-        <a data-bind="css: source == 'mru' ? 'sel' : '', attr: { href: $data.source == 'mru' ? null : '?s=mru' }">
-            Men's
-        </a>
-        <a data-bind="css: source == 'wru' ? 'sel' : '', attr: { href: $data.source == 'wru' ? null : '?s=wru' }">
-            Women's
-        </a>
+    <div id="union" class="segmented-control" role="group" aria-label="Select rankings competition">
+        <button type="button"
+            class="segmented-control__segment"
+            data-bind="css: { 'segmented-control__segment--active': source == 'mru' },
+                       attr: { 'aria-pressed': source == 'mru' },
+                       click: function () { if ($data.source !== 'mru') { window.location.search = '?s=mru'; } }">
+            <span class="segmented-control__label">Men's</span>
+        </button>
+        <button type="button"
+            class="segmented-control__segment"
+            data-bind="css: { 'segmented-control__segment--active': source == 'wru' },
+                       attr: { 'aria-pressed': source == 'wru' },
+                       click: function () { if ($data.source !== 'wru') { window.location.search = '?s=wru'; } }">
+            <span class="segmented-control__label">Women's</span>
+        </button>
     </div>
     <div id="leftright">
         <div id="left">
@@ -32,14 +40,26 @@
                 <h3>Rankings</h3>
             </div>
             <div id="which" data-bind="if: rankingsChoice">
-                <label data-bind="css: $data.rankingsChoice() === 'original' ? 'sel' : ''">
-                    <input type="radio" name="rankings" value="original" data-bind="checked: rankingsChoice">
-                    <span data-bind="text: $data.originalDate() + ($data.originalDateIsEstimated() ? '*' : ''), title: $data.originalDateIsEstimated() ? 'Last published rankings on or before this date' : ''" />
-                </label>
-                <label data-bind="css: $data.rankingsChoice() === 'calculated' ? 'sel' : ''">
-                    <input type="radio" name="rankings" value="calculated" data-bind="checked: rankingsChoice">
-                    CALCULATED
-                </label>
+                <div class="segmented-control segmented-control--block">
+                    <fieldset class="segmented-control__fieldset" role="radiogroup" aria-label="Choose rankings to display">
+                        <legend class="visually-hidden">Rankings to display</legend>
+                        <label class="segmented-control__segment"
+                            data-bind="css: { 'segmented-control__segment--active': $data.rankingsChoice() === 'original' }">
+                            <input class="segmented-control__input" type="radio" name="rankings" value="original" data-bind="checked: rankingsChoice">
+                            <span class="segmented-control__content">
+                                <span class="segmented-control__label"
+                                    data-bind="text: $data.originalDate() + ($data.originalDateIsEstimated() ? '*' : ''), title: $data.originalDateIsEstimated() ? 'Last published rankings on or before this date' : ''"></span>
+                            </span>
+                        </label>
+                        <label class="segmented-control__segment"
+                            data-bind="css: { 'segmented-control__segment--active': $data.rankingsChoice() === 'calculated' }">
+                            <input class="segmented-control__input" type="radio" name="rankings" value="calculated" data-bind="checked: rankingsChoice">
+                            <span class="segmented-control__content">
+                                <span class="segmented-control__label">CALCULATED</span>
+                            </span>
+                        </label>
+                    </fieldset>
+                </div>
             </div>
 
             <div id="rankings">
