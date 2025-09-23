@@ -344,11 +344,11 @@ body {
         }
     }
 
-    label&__segment {
+    label#{&}__segment {
         min-width: 0;
     }
 
-    button&__segment {
+    button#{&}__segment {
         appearance: none;
         background-color: transparent;
     }
