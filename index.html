@@ -151,18 +151,6 @@
                             </div>
                         </div>
                         <!-- ko if: $data.hasValidTeams() && !$data.alreadyInRankings -->
-                        <div class="possible-changes possible-changes--panel">
-                            <div class="fixture-change-panel">
-                                <div class="fixture-change-panel__team fixture-change-panel__team--home">
-                                    <span class="fixture-change-panel__label">Home rating</span>
-                                    <span class="fixture-change-panel__value" data-bind="text: $data.homeRankingBefore() ? $data.homeRankingBefore().toFixed(2) : '—'"></span>
-                                </div>
-                                <div class="fixture-change-panel__team fixture-change-panel__team--away">
-                                    <span class="fixture-change-panel__label">Away rating</span>
-                                    <span class="fixture-change-panel__value" data-bind="text: $data.awayRankingBefore() ? $data.awayRankingBefore().toFixed(2) : '—'"></span>
-                                </div>
-                            </div>
-                        </div>
                         <!-- /ko -->
                         <!-- ko if: alreadyInRankings -->
                         <div class="possible-changes possible-changes--message">
