@@ -630,7 +630,7 @@ body {
   content: "▼"; /* or replace with an SVG background */
   position: absolute;
   right: 16px;
-  top: 100%;
+  top: 75%;
   transform: translateY(-50%);
   pointer-events: none; /* clicks go to the select */
   font-size: 0.9rem;
