@@ -601,6 +601,20 @@ body {
         gap: 8px;
     }
 
+    .fixture-card__team-selection {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+
+    .fixture-card__team-selection .plain-text-select {
+        flex: 1;
+    }
+
+    .fixture-card__team-selection .fixture-card__rating-badge {
+        flex-shrink: 0;
+    }
+
     .fixture-card__outcome {
         margin-top: auto;
         position: relative;
