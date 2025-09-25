@@ -104,25 +104,21 @@
                             </div>
                             <!-- /ko -->
                             <div class="fixture-card__flags" role="group" aria-label="Fixture flags">
-                                <button type="button"
-                                        class="fixture-card__flag"
-                                        title="No Home Advantage"
-                                        data-bind="css: { 'fixture-card__flag--active': noHome, 'fixture-card__flag--disabled': alreadyInRankings },
-                                                   attr: { 'aria-pressed': noHome, 'aria-disabled': alreadyInRankings ? 'true' : null },
-                                                   enable: !$data.alreadyInRankings,
-                                                   click: function () { if (!$data.alreadyInRankings) { noHome(!noHome()); } }">
+                                <span class="fixture-card__flag"
+                                      role="img"
+                                      title="No Home Advantage"
+                                      aria-label="No Home Advantage flag"
+                                      data-bind="css: { 'fixture-card__flag--active': noHome, 'fixture-card__flag--disabled': alreadyInRankings }">
                                     <span class="fixture-card__flag-text">NHA</span>
                                     <span class="fixture-card__flag-note" data-bind="if: switched" title="Home team is nominally Away">*</span>
-                                </button>
-                                <button type="button"
-                                        class="fixture-card__flag"
-                                        title="Is Rugby World Cup match"
-                                        data-bind="css: { 'fixture-card__flag--active': isRwc, 'fixture-card__flag--disabled': alreadyInRankings },
-                                                   attr: { 'aria-pressed': isRwc, 'aria-disabled': alreadyInRankings ? 'true' : null },
-                                                   enable: !$data.alreadyInRankings,
-                                                   click: function () { if (!$data.alreadyInRankings) { isRwc(!isRwc()); } }">
+                                </span>
+                                <span class="fixture-card__flag"
+                                      role="img"
+                                      title="Is Rugby World Cup match"
+                                      aria-label="Rugby World Cup flag"
+                                      data-bind="css: { 'fixture-card__flag--active': isRwc, 'fixture-card__flag--disabled': alreadyInRankings }">
                                     <span class="fixture-card__flag-text">RWC</span>
-                                </button>
+                                </span>
                             </div>
                         </div>
                         <div class="fixture-card__content">
