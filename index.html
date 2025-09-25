@@ -98,12 +98,41 @@
                         <div class="fixture-card__hero">
                             <!-- ko if: $data.venueNameAndCountry || $data.kickoff || $data.liveScoreMode || $data.eventPhase -->
                             <div class="fixture-card__hero-meta">
-                                <div class="fixture-card__hero-item fixture-card__hero-item--kickoff" data-bind="text: kickoff" title="Kickoff in your browser time"></div>
-                                <!-- ko if: $data.eventPhase || ($data.liveScoreMode && $data.liveScoreMode !== 'Upcoming') -->
-                                <div class="fixture-card__hero-item fixture-card__hero-item--phase" data-bind="text: $data.eventPhase ? ($data.liveScoreMode && $data.liveScoreMode !== 'Upcoming' ? $data.eventPhase + ' (' + $data.liveScoreMode + ')' : $data.eventPhase) : $data.liveScoreMode"></div>
-                                <!-- /ko -->
-                                <div class="fixture-card__hero-item fixture-card__hero-item--venue" data-bind="text: venueNameAndCountry, attr: { title: venueCity }"></div>
+                              <div class="fixture-card__hero-item fixture-card__hero-item--kickoff">
+                                    <span class="fixture-card__hero-icon">
+      <!-- clock svg -->
+                                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                        <circle cx="12" cy="12" r="10" stroke="currentColor" fill="none" stroke-width="2"/>
+                                        <path d="M12 6v6l4 2" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round"/>
+                                      </svg>
+                                    </span>
+                                    <span data-bind="text: kickoff"></span>
+                              </div>
+
+  <!-- ko if: $data.eventPhase || ($data.liveScoreMode && $data.liveScoreMode !== 'Upcoming') -->
+                             <div class="fixture-card__hero-item fixture-card__hero-item--phase">
+                                    <span class="fixture-card__hero-icon">
+      <!-- flag svg -->
+                                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                        <path d="M4 4h12l-2 4 2 4H4v8" stroke="currentColor" fill="none" stroke-width="2"/>
+                                        </svg>
+                                    </span>
+                                    <span data-bind="text: $data.eventPhase ? ($data.liveScoreMode && $data.liveScoreMode !== 'Upcoming' ? $data.eventPhase + ' (' + $data.liveScoreMode + ')' : $data.eventPhase) : $data.liveScoreMode"></span>
                             </div>
+  <!-- /ko -->
+
+                              <div class="fixture-card__hero-item fixture-card__hero-item--venue" title="Kickoff in your browser time">
+                                <span class="fixture-card__hero-icon">
+      <!-- stadium svg -->
+                                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                        <rect x="3" y="10" width="18" height="10" stroke="currentColor" fill="none" stroke-width="2"/>
+                                        <path d="M3 10l9-6 9 6" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round"/>
+                                  </svg>
+                                </span>
+                                <span data-bind="text: venueNameAndCountry, attr: { title: venueCity }"></span>
+                              </div>
+                            </div>
+
                             <!-- /ko -->
                             <div class="fixture-card__flags" role="group" aria-label="Fixture flags">
                                 <span class="fixture-card__flag"
