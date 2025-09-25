@@ -642,7 +642,7 @@ body {
   content: "▼"; /* or replace with an SVG background */
   position: absolute;
   right: 16px;
-  top: 52%;
+  top: 65%;
   transform: translateY(-50%);
   pointer-events: none; /* clicks go to the select */
   font-size: 0.9rem;
@@ -708,6 +708,7 @@ body {
         border: 0;
         background-clip: padding-box;
         transition: background 0.2s ease, box-shadow 0.2s ease, color 0.2s ease;
+
 
         &.fixture-card__flag--disabled {
             opacity: 0.5;
