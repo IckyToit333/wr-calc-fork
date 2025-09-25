@@ -487,6 +487,7 @@ body {
         align-items: center;
         justify-content: space-between;
         gap: 12px 16px;
+        white-space: normal;
     }
 
     .fixture-card__hero-meta {
@@ -499,6 +500,7 @@ body {
         text-transform: uppercase;
         flex: 1 1 auto;
         min-width: 200px;
+        white-space: normal;
     }
 
     .fixture-card__hero-item {
