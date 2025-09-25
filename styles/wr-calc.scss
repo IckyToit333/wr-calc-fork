@@ -649,15 +649,15 @@ body {
         align-items: center;
         gap: 6px;
         align-self: flex-start;
-        padding: 6px 14px;
-        border-radius: 999px;
-        background: rgba($accent, 0.12);
+        padding: 0;
+        border-radius: 0;
+        background: none;
         color: darken($accent, 6%);
         font-size: 12px;
         font-weight: 600;
         letter-spacing: 0.08em;
         text-transform: uppercase;
-        box-shadow: inset 0 0 0 1px rgba($accent, 0.18);
+        box-shadow: none;
     }
     .fixture-card__outcome::after {
   content: "▼"; /* or replace with an SVG background */
