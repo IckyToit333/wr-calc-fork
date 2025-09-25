@@ -534,6 +534,13 @@ body {
         content: '🏟';
     }
 
+    .fixture-card__hero-item--venue {
+        flex: 1 1 100%;
+        align-items: flex-start;
+        white-space: normal;
+        overflow-wrap: anywhere;
+    }
+
     @include smallscreen {
         .fixture-card__hero {
             flex-direction: column;
