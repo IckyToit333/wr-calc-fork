@@ -78,7 +78,7 @@ var loadRankings = function (rankingsSource, startDate) {
             });
         } else {
             // This should be parallelisable if we have our observables set up properly. (Fixture validity depends on teams.)
-            addFixture();
+            placeholderFixture = addFixture();
             loadFixtures(rankings, !!dateString);
         }
     });
@@ -99,7 +99,10 @@ var addFixture = function (top, process) {
     } else {
         viewModel.fixtures.push(fixture);
     }
+    return fixture;
 }
+
+var placeholderFixture = null;
 
 // Load fixtures from World Rugby.
 var loadFixtures = function(rankings, specifiedDate) {
@@ -274,6 +277,14 @@ var fixturesLoaded = function (fixtures, rankings) {
         viewModel.queryString.subscribe(function (qs) {
             history.replaceState(null, '', '?' + qs);
         });
+    }
+
+    if (placeholderFixture) {
+        var fixturesArray = viewModel.fixtures();
+        if (fixturesArray.length > 1 && fixturesArray[fixturesArray.length - 1] === placeholderFixture && !placeholderFixture.hasValidTeams()) {
+            viewModel.fixtures.remove(placeholderFixture);
+        }
+        placeholderFixture = null;
     }
 };
 

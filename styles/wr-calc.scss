@@ -534,6 +534,13 @@ body {
         content: '🏟';
     }
 
+    .fixture-card__hero-item--venue {
+        flex: 1 1 100%;
+        align-items: flex-start;
+        white-space: normal;
+        overflow-wrap: anywhere;
+    }
+
     @include smallscreen {
         .fixture-card__hero {
             flex-direction: column;
@@ -601,6 +608,20 @@ body {
         gap: 8px;
     }
 
+    .fixture-card__team-selection {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+
+    .fixture-card__team-selection .plain-text-select {
+        flex: 1;
+    }
+
+    .fixture-card__team-selection .fixture-card__rating-badge {
+        flex-shrink: 0;
+    }
+
     .fixture-card__outcome {
         margin-top: auto;
         position: relative;
@@ -642,7 +663,7 @@ body {
   content: "▼"; /* or replace with an SVG background */
   position: absolute;
   right: 16px;
-  top: 52%;
+  top: 65%;
   transform: translateY(-50%);
   pointer-events: none; /* clicks go to the select */
   font-size: 0.9rem;
@@ -718,6 +739,11 @@ body {
             box-shadow: inset 0 0 0 1px rgba($accent, 0.18);
             color: darken($accent, 6%);
         }
+    }
+
+    .fixture-card__flag-text {
+        display: inline-block;
+        line-height: 1;
     }
 
     .fixture-card__flag-text {
