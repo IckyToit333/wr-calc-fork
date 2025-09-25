@@ -95,15 +95,32 @@
                 <div class="fixtures-list">
                     <!-- ko foreach: fixtures -->
                     <div class="fixture-card">
-                        <!-- ko if: $data.venueNameAndCountry || $data.kickoff || $data.liveScoreMode || $data.eventPhase -->
                         <div class="fixture-card__hero">
+                            <!-- ko if: $data.venueNameAndCountry || $data.kickoff || $data.liveScoreMode || $data.eventPhase -->
                             <div class="fixture-card__hero-meta">
                                 <div class="fixture-card__hero-item fixture-card__hero-item--kickoff" data-bind="text: kickoff" title="Kickoff in your browser time"></div>
                                 <div class="fixture-card__hero-item fixture-card__hero-item--phase" data-bind="text: ($data.eventPhase && $data.liveScoreMode) ? ($data.eventPhase + ' (' + $data.liveScoreMode + ')') : ($data.eventPhase || $data.liveScoreMode)"></div>
                                 <div class="fixture-card__hero-item fixture-card__hero-item--venue" data-bind="text: venueNameAndCountry, attr: { title: venueCity }"></div>
                             </div>
+                            <!-- /ko -->
+                            <div class="fixture-card__flags" role="group" aria-label="Fixture flags">
+                                <span class="fixture-card__flag"
+                                      role="img"
+                                      title="No Home Advantage"
+                                      aria-label="No Home Advantage flag"
+                                      data-bind="css: { 'fixture-card__flag--active': noHome, 'fixture-card__flag--disabled': alreadyInRankings }">
+                                    <span class="fixture-card__flag-text">NHA</span>
+                                    <span class="fixture-card__flag-note" data-bind="if: switched" title="Home team is nominally Away">*</span>
+                                </span>
+                                <span class="fixture-card__flag"
+                                      role="img"
+                                      title="Is Rugby World Cup match"
+                                      aria-label="Rugby World Cup flag"
+                                      data-bind="css: { 'fixture-card__flag--active': isRwc, 'fixture-card__flag--disabled': alreadyInRankings }">
+                                    <span class="fixture-card__flag-text">RWC</span>
+                                </span>
+                            </div>
                         </div>
-                        <!-- /ko -->
                         <div class="fixture-card__content">
                             <div class="fixture-card__decision-board">
                                 <div class="fixture-card__decision-column fixture-card__decision-column--left">
@@ -133,20 +150,6 @@
                                         <select class="plain-text-select" data-bind="options: $parent.teams, optionsText: 'displayName', optionsValue: 'id', value: awayId, optionsCaption: awayCaption, disabled: !$data.canEditTeams() || $data.alreadyInRankings"></select>
                                         <span class="fixture-card__rating-badge" data-bind="text: $data.awayRankingBefore() ? $data.awayRankingBefore().toFixed(2) + ' pts' : '—'"></span>
                                     </div>
-                                </div>
-                            </div>
-                            <div class="fixture-card__section fixture-card__section--flags">
-                                <span class="fixture-card__label">Flags</span>
-                                <div class="fixture-card__flags">
-                                    <label class="fixture-card__flag" title="No Home Advantage">
-                                        <input type="checkbox" data-bind="checked: noHome, click: preventCheckboxToggle, event: { keydown: preventCheckboxToggle }" />
-                                        <span class="fixture-card__flag-text">NHA</span>
-                                        <span class="fixture-card__flag-note" data-bind="if: switched" title="Home team is nominally Away">*</span>
-                                    </label>
-                                    <label class="fixture-card__flag" title="Is Rugby World Cup match">
-                                        <input type="checkbox" data-bind="checked: isRwc, click: preventCheckboxToggle, event: { keydown: preventCheckboxToggle }" />
-                                        <span class="fixture-card__flag-text">RWC</span>
-                                    </label>
                                 </div>
                             </div>
                         </div>
